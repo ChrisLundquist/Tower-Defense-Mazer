@@ -9,21 +9,21 @@ class AStar
     def find_path(start, goal)
         been_there = {}
         pqueue = PriorityQueue.new
-        pqueue << [1, [start, [], 0]]
+        pqueue.add(1, [start, [], 0])
         # Less than 25 is arbitrary
         while(!pqueue.empty?)
             spot, path_so_far, cost_so_far = pqueue.next
             next if been_there[spot]
             newpath = path_so_far + [spot]
             return newpath if (spot == goal)
-            been_there[spot] = 1
+            been_there[spot] = true
             @adjacency.call(spot).each do |newspot|
                 next if been_there[newspot]
                 tcost = @cost.call(spot, newspot)
                 next unless tcost
                 newcost = cost_so_far + tcost
-                pqueue << [newcost + @distance.call(goal, newspot),
-                    [newspot, newpath, newcost]]
+                pqueue.add(newcost + @distance.call(goal, newspot),
+                    [newspot, newpath, newcost])
             end
         end
         return []
