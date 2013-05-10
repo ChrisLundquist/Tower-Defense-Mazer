@@ -2,7 +2,12 @@
 Make your tower defense mazes optimally long.
 
 You can use a poorly implemented genetic algorithm approach
-or a structured approach
+or a structured approach.
+
+Note: I considered diagonal a valid move.
+I construct the edges for each node by selecting all nodes within Math.sqrt(2)
+
+If you don't want diagonals, change that to distance 1.
 
 ## Usage
 
